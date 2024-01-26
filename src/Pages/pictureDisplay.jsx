@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+import ImageModal from "../Components/imageModal";
+
 import Arch from "../assets/workPhotos/arch.jpg";
 import Cabin from "../assets/workPhotos/cabin.jpg";
 import City from "../assets/workPhotos/city.jpg";
@@ -22,6 +24,18 @@ import Water from "../assets/workPhotos/water.jpg";
 import Mtn from "../assets/workPhotos/waterMtn.jpg";
 
 function pictureDisplay() {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageClick = (imageSrc) => {
+    setSelectedImage(imageSrc);
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+    setSelectedImage(null);
+  };
   const itemData = [
     {
       img: Arch,
@@ -89,20 +103,50 @@ function pictureDisplay() {
     },
   ];
   return (
-    <Box sx={{ width: 700, height: 450, overflowY: "scroll" }}>
-      <ImageList variant="masonry" cols={3} gap={8}>
-        {itemData.map((item) => (
-          <ImageListItem key={item.img}>
-            <img
-              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              src={`${item.img}?w=248&fit=crop&auto=format`}
-              alt={item.title}
-              loading="lazy"
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </Box>
+    <>
+      <Box
+        sx={{
+          width: "75%",
+          height: "100vh",
+          overflowY: "scroll",
+          margin: "0 auto",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <ImageList variant="masonry" cols={3} gap={8}>
+          {itemData.map((item) => (
+            <ImageListItem key={item.img}>
+              <img
+                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                src={`${item.img}?w=248&fit=crop&auto=format`}
+                alt={item.title}
+                loading="lazy"
+                onClick={() => handleImageClick(item.img)}
+                style={{ width: "100%", height: "100%" }}
+              />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      </Box>
+      <div className="work main-container">
+        <ImageModal
+          show={showModal}
+          onHide={handleModalClose}
+          imageSrc={selectedImage}
+        />
+        {/* {showBackToTop ? (
+          <a
+            href="#back-to-top"
+            id="back-to-top"
+            title="Back to Top"
+            className="show"
+          >
+            &uarr;
+          </a>
+        ) : null} */}
+      </div>
+    </>
   );
 }
 
