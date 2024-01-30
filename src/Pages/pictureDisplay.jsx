@@ -27,6 +27,15 @@ function pictureDisplay() {
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
+  // function srcset(image, size, rows = 1, cols = 1) {
+  //   return {
+  //     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+  //     srcSet: `${image}?w=${size * cols}&h=${
+  //       size * rows
+  //     }&fit=crop&auto=format&dpr=2 2x`,
+  //   };
+  // }
+
   const handleImageClick = (imageSrc) => {
     setSelectedImage(imageSrc);
     setShowModal(true);
@@ -104,47 +113,30 @@ function pictureDisplay() {
   ];
   return (
     <>
-      <Box
-        sx={{
-          width: "75%",
-          height: "100vh",
-          overflowY: "scroll",
-          margin: "0 auto",
-          display: "flex",
-          justifyContent: "center",
-        }}
+      <ImageList
+        sx={{ width: "100%", height: "100vh" }}
+        variant="woven"
+        cols={3}
+        gap={8}
       >
-        <ImageList variant="masonry" cols={3} gap={8}>
-          {itemData.map((item) => (
-            <ImageListItem key={item.img}>
-              <img
-                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                src={`${item.img}?w=248&fit=crop&auto=format`}
-                alt={item.title}
-                loading="lazy"
-                onClick={() => handleImageClick(item.img)}
-                style={{ width: "100%", height: "100%" }}
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
-      </Box>
-      <div className="work main-container">
+        {itemData.map((item) => (
+          <ImageListItem key={item.img}>
+            <img
+              srcSet={`${item.img}?w=161&fit=crop&auto=format&dpr=2 2x`}
+              src={`${item.img}?w=161&fit=crop&auto=format`}
+              alt={item.title}
+              onClick={() => handleImageClick(item.img)}
+              style={{ width: "85%", height: "100%" }}
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+      <div>
         <ImageModal
           show={showModal}
           onHide={handleModalClose}
           imageSrc={selectedImage}
         />
-        {/* {showBackToTop ? (
-          <a
-            href="#back-to-top"
-            id="back-to-top"
-            title="Back to Top"
-            className="show"
-          >
-            &uarr;
-          </a>
-        ) : null} */}
       </div>
     </>
   );
