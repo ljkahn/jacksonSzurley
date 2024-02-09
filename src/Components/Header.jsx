@@ -4,27 +4,28 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 
 const pages = ["Portfolio", "Contact", "About", "Store"];
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [openDrawer, setOpenDrawer] = React.useState(false);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
+  const handleOpenDrawer = () => {
+    setOpenDrawer(true);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleCloseDrawer = () => {
+    setOpenDrawer(false);
   };
 
-  // Adjust the route paths according to your needs
   const routePaths = {
-    Portfolio: "/", // Assuming Portfolio should link to the home page
+    Portfolio: "/",
     Contact: "/contact",
     About: "/about",
     Store: "/store",
@@ -32,50 +33,62 @@ function Header() {
 
   return (
     <AppBar position="static" color="inherit">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component={RouterLink}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
+      <Toolbar>
+        <Typography
+          variant="h6"
+          noWrap
+          component={RouterLink}
+          to="/"
+          sx={{
+            mr: 2,
+            flexGrow: 1,
+            fontFamily: "monospace",
+            fontWeight: 700,
+            letterSpacing: ".3rem",
+            color: "inherit",
+            textDecoration: "none",
+          }}
+        >
+          Jackson Szurley
+        </Typography>
+
+        {/* Menu Button for Smaller Screens */}
+        <Box sx={{ display: { xs: "block", md: "none" } }}>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={handleOpenDrawer}
           >
-            Jackson Szurley
-          </Typography>
+            <MenuIcon />
+          </IconButton>
+        </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            {/* Implement menu button and dropdown for smaller screens */}
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+        {/* Drawer for Smaller Screens */}
+        <Drawer
+          anchor="top"
+          open={openDrawer}
+          onClose={handleCloseDrawer}
+          sx={{ "& .MuiDrawer-paper": { top: "64px" } }}
+        >
+          <List>
             {pages.map((page) => (
-              <Button
+              <ListItem
                 key={page}
-                onClick={handleCloseNavMenu}
+                button
                 component={RouterLink}
                 to={routePaths[page]}
-                sx={{ my: 2, color: "white", display: "block" }}
+                onClick={handleCloseDrawer}
               >
-                {page}
-              </Button>
+                <ListItemText primary={page} />
+              </ListItem>
             ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            {/* Implement user menu and avatar if needed */}
-          </Box>
-        </Toolbar>
-      </Container>
+          </List>
+        </Drawer>
+      </Toolbar>
     </AppBar>
   );
 }
+
 export default Header;

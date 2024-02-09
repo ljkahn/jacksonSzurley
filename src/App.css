@@ -1,26 +1,32 @@
 .contact-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-}
-
-.contact-form {
-    flex: 1;
-    margin-right: 20px;
-    /* Adjust the spacing between the form and image */
 }
 
 .contact-image {
-    flex: 1;
-    max-width: 300px;
-    /* Adjust the maximum width of the image */
+    margin-bottom: 1rem;
 }
 
-.center-container {
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-    height: 100vh;
-    /* Center vertically on the page */
+.contact-form {
+    width: 100%;
+    max-width: 600px;
+    /* Adjust max-width as needed */
 }
 
+.inquiry {
+    text-align: center;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+    .contact-container {
+        padding: 0 1rem;
+        /* Add padding to the sides for smaller screens */
+    }
+
+    .contact-form {
+        max-width: 100%;
+        /* Adjust the width of the form for smaller screens */
+    }
+}
