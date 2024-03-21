@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -10,11 +10,13 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const pages = ["Portfolio", "Contact", "About", "Store"];
 
 function Header() {
   const [openDrawer, setOpenDrawer] = React.useState(false);
+  const isSmallScreen = useMediaQuery("(max-width:600px)");
 
   const handleOpenDrawer = () => {
     setOpenDrawer(true);
@@ -52,8 +54,8 @@ function Header() {
           Jackson Szurley
         </Typography>
 
-        {/* Menu Button for Smaller Screens */}
-        <Box sx={{ display: { xs: "block", md: "none" } }}>
+        {/* Conditionally render menu button based on screen size */}
+        {isSmallScreen ? (
           <IconButton
             size="large"
             edge="start"
@@ -63,9 +65,23 @@ function Header() {
           >
             <MenuIcon />
           </IconButton>
-        </Box>
+        ) : (
+          <List sx={{ display: "flex" }}>
+            {pages.map((page) => (
+              <ListItem
+                key={page}
+                button
+                component={RouterLink}
+                to={routePaths[page]}
+                sx={{ mr: 2 }}
+              >
+                <ListItemText primary={page} />
+              </ListItem>
+            ))}
+          </List>
+        )}
 
-        {/* Drawer for Smaller Screens */}
+        {/* Drawer for smaller screens */}
         <Drawer
           anchor="top"
           open={openDrawer}

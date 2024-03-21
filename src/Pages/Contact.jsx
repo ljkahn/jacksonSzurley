@@ -1,17 +1,15 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
-import Form from "react-bootstrap/Form";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CardMedia from "@mui/material/CardMedia";
 import Card from "@mui/material/Card";
 
 function Contact() {
-  const navigate = useNavigate();
-  const formRef = useRef(); // Create a ref for the form
+  const formRef = useRef();
   const [formData, setFormData] = useState({
-    email: "",
+    name: "",
+    subject: "",
     message: "",
   });
   const [isEmailSent, setIsEmailSent] = useState(false);
@@ -26,21 +24,21 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Use the appropriate EmailJS template, service, and user ID
     emailjs
       .sendForm(
         "service_rl9e4x9",
         "template_974g5lq",
-        formRef.current, // Use the ref here
+        formRef.current,
         "o0rmbvpLvdPPViphx"
       )
+
       .then(
         (result) => {
           console.log(result.text);
           setIsEmailSent(true);
           setFormData({
-            email: "",
+            name: "",
+            subject: "",
             message: "",
           });
         },
@@ -51,29 +49,44 @@ function Contact() {
   };
 
   return (
-    <div className="center-container">
-      <div className="contact-container">
-        <div className="contact-image">
+    <div
+      className="center-container"
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "50px 0",
+      }}
+    >
+      <div
+        className="contact-container"
+        style={{
+          maxWidth: "900px",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          margin: "auto",
+          gap: "2rem",
+        }}
+      >
+        <div className="contact-image" style={{ flex: 1 }}>
           <Card
-            sx={{
-              maxHeight: "100%",
-              width: 300,
-              marginTop: "3rem",
-            }}
+            sx={{ maxHeight: "100%", maxWidth: "345px", marginTop: "3rem" }}
           >
             <CardMedia
               component="img"
               height="100%"
               image="./src/assets/contactPhoto.jpg"
-              alt="Fat Sully's"
-              style={{ marginLeft: "2rem" }} // Adjust margin-left for spacing
+              alt="Contact Image"
             />
           </Card>
         </div>
 
-        <div className="contact-form" style={{ marginLeft: "2rem" }}>
+        <div className="contact-form" style={{ flex: 1 }}>
           <h3 className="text-center inquiry">
-            Please send me the following information in your inquiry
+            Please send the following information in your inquiry
           </h3>
 
           {isEmailSent && (
@@ -82,7 +95,7 @@ function Contact() {
             </div>
           )}
 
-          <Form ref={formRef} onSubmit={handleSubmit}>
+          <form ref={formRef} onSubmit={handleSubmit}>
             <TextField
               id="outlined-basic"
               label="Name"
@@ -92,7 +105,7 @@ function Contact() {
               margin="normal"
               onChange={handleChange}
               value={formData.name}
-              style={{ width: "45%" }}
+              style={{ width: "430px" }}
             />
             <br />
             <TextField
@@ -104,7 +117,7 @@ function Contact() {
               margin="normal"
               onChange={handleChange}
               value={formData.subject}
-              style={{ width: "45%" }}
+              style={{ width: "430px" }}
             />
             <br />
             <TextField
@@ -119,7 +132,7 @@ function Contact() {
               margin="normal"
               onChange={handleChange}
               value={formData.message}
-              style={{ width: "45%" }}
+              style={{ width: "430px" }}
             />
             <br />
             <Button
@@ -131,7 +144,7 @@ function Contact() {
             >
               Submit
             </Button>
-          </Form>
+          </form>
         </div>
       </div>
     </div>
