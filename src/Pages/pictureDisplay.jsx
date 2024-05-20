@@ -22,6 +22,24 @@ import Texture from "../assets/workPhotos/texture.jpg";
 import Tree from "../assets/workPhotos/tree.jpg";
 import Water from "../assets/workPhotos/water.jpg";
 import Mtn from "../assets/workPhotos/waterMtn.jpg";
+import bikeTire from "../assets/workPhotos/bikeTire.jpg";
+import Drive from "../assets/workPhotos/drive.jpg";
+import Drive1 from "../assets/workPhotos/drive1.jpg";
+import Flannel from "../assets/workPhotos/flannel.jpg";
+import Flannel1 from "../assets/workPhotos/flannel1.jpg";
+import Light from "../assets/workPhotos/light.jpg";
+import Mountains from "../assets/workPhotos/mountains.jpg";
+import Mountains1 from "../assets/workPhotos/mountains1.jpg";
+import Pump from "../assets/workPhotos/pump.jpg";
+import Sam from "../assets/workPhotos/sam.jpg";
+import Sam1 from "../assets/workPhotos/sam1.jpg";
+import Sam2 from "../assets/workPhotos/sam2.jpg";
+import Sam3 from "../assets/workPhotos/sam3.jpg";
+import Tire from "../assets/workPhotos/tire.jpg";
+import Tree1 from "../assets/workPhotos/tree1.jpg";
+import Truck from "../assets/workPhotos/truck.jpg";
+import Up from "../assets/workPhotos/up.jpg";
+import Up1 from "../assets/workPhotos/up1.jpg";
 
 function pictureDisplay() {
   const [showModal, setShowModal] = useState(false);
@@ -108,6 +126,84 @@ function pictureDisplay() {
     },
     {
       img: Sun,
+      title: "Coffee table",
+    },
+    {
+      img: bikeTire,
+      title: "Coffee table",
+    },
+
+    {
+      img: Drive,
+      title: "Coffee table",
+    },
+    {
+      img: Drive1,
+      title: "Coffee table",
+    },
+
+    {
+      img: Flannel,
+      title: "Coffee table",
+    },
+    {
+      img: Flannel1,
+      title: "Coffee table",
+    },
+    {
+      img: Light,
+      title: "Coffee table",
+    },
+    {
+      img: Mountains,
+      title: "Coffee table",
+    },
+
+    {
+      img: Mountains1,
+      title: "Coffee table",
+    },
+    {
+      img: Pump,
+      title: "Coffee table",
+    },
+    {
+      img: Sam,
+      title: "Coffee table",
+    },
+    {
+      img: Sam1,
+      title: "Coffee table",
+    },
+
+    {
+      img: Sam2,
+      title: "Coffee table",
+    },
+    {
+      img: Sam3,
+      title: "Coffee table",
+    },
+    {
+      img: Tire,
+      title: "Coffee table",
+    },
+
+    {
+      img: Tree1,
+      title: "Coffee table",
+    },
+
+    {
+      img: Truck,
+      title: "Coffee table",
+    },
+    {
+      img: Up,
+      title: "Coffee table",
+    },
+    {
+      img: Up1,
       title: "Coffee table",
     },
   ];
